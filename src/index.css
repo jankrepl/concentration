@@ -1,4 +1,24 @@
-.Header {
-    text-align: center;
-    font-size: 100px;
+
+#wrapper {
+    /*text-align: center;*/
+    height: 768px;
+    width: 1366px;
+    background-color: yellow;
+}
+
+#header {
+    height: 100px;
+    background-color: green;
+    float: top;
+}
+
+#body {
+    height: 568px;
+    background-color: orange;
+}
+
+#footer {
+    height: 100px;
+    background-color: blue;
+    float: bottom;
 }
