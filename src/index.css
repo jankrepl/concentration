@@ -22,3 +22,8 @@
     background-color: blue;
     float: bottom;
 }
+
+.gridContainer {
+    background-color: aliceblue;
+    display: grid;
+}
