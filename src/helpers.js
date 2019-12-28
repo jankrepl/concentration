@@ -64,6 +64,60 @@ class DealtCards {
         }
         return cards
     }
+
+    /**
+     * Turn all cards so that none is visible.
+     */
+    reset() {
+        this.cards.forEach((row, r) => {
+            row.forEach((x, c) => {
+                x.isTurned = false
+
+            })
+        })
+    }
+
+    countTurned() {
+        let nCardsTurned = 0;
+        this.cards.forEach((row, r) => {
+            row.forEach((x, c) => {
+                nCardsTurned += Number(x.isTurned)
+            })
+        });
+        return nCardsTurned
+    }
+
+    markRevealed() {
+        let nCardsTurned = this.countTurned();
+
+        if (nCardsTurned === 2) {
+            let turnedCards = [];
+            this.cards.forEach((row, r) => {
+                row.forEach((x, c) => {
+                    if (x.isTurned) {
+                        turnedCards.push(x)
+                    }
+                })
+            });
+            if (turnedCards[0].val === turnedCards[1].val) {
+                turnedCards[0].hasBeenRevealed = true;
+                turnedCards[1].hasBeenRevealed = true;
+            }
+        }
+
+    }
+
+    checkGameOver() {
+        for (let r = 0; r < this.nRows; r++) {
+            for (let c = 0; c < this.nCols; c++) {
+                if (!this.cards[r][c].hasBeenRevealed) {
+                    return false
+                }
+            }
+        }
+        return true
+    }
+
 }
 
 

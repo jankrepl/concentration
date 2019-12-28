@@ -1,12 +1,9 @@
 import React from 'react'
 import DealtCards from '../helpers'
 import Card from './card'
+import End from "./end";
 
 const Game = ({dc, setDC, nRows, nCols, gameInitialized, setGameInitialized}) => {
-
-    // HELPERS
-
-
     // EXECUTION
     if (!gameInitialized || (dc === null)) {
         // very first game or restarted
@@ -24,13 +21,19 @@ const Game = ({dc, setDC, nRows, nCols, gameInitialized, setGameInitialized}) =>
         }
     }
 
-    let temp = (cardValues.map((x, ix) => <div className="gridItem" key={ix}><Card dc={x[0]} row={x[1]} col={x[2]} setDC={setDC} color='black' fontSize={20} backgroundColorIsTurned='green'/></div>));
+    let temp = (cardValues.map((x, ix) => <div className="gridItem" key={ix}><Card dc={x[0]} row={x[1]} col={x[2]}
+                                                                                   setDC={setDC} color='black'
+                                                                                   fontSize={20}
+                                                                                   backgroundColorIsTurned='green'/>
+    </div>));
 
     return (
-        <div className="gridContainer" style={{'gridTemplateColumns': `repeat(${nCols},auto` }}>
-            {temp}
+        <div>
+            {!dc.checkGameOver() ? (
+                <div className="gridContainer" style={{'gridTemplateColumns': `repeat(${nCols},auto`}}>
+                    {temp}
+                </div>) : (<End/>)}
         </div>)
-
 
 };
 

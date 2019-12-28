@@ -5,36 +5,46 @@ const Card = ({dc, row, col, setDC, color, fontSize, backgroundColorIsTurned}) =
     // Helpers
 
     const onClick = () => {
-        console.log('INSIDE onClick', row, col);
         setDC((dcOld) => {
-            const dcNew = JSON.parse(JSON.stringify(dcOld));
-            dcNew.cards[row][col].isTurned = !dcNew.cards[row][col].isTurned;
+            // make a deep copy
+            const dcNew = Object.assign(Object.create(Object.getPrototypeOf(dcOld)), dcOld);
+
+            // if 2 cards turned make sure they are not visible
+            if (dcNew.countTurned() === 2){
+                dcNew.reset()
+            }
+
+            // Turn selected card (make sure not turned already)
+            if (!dcNew.cards[row][col].isTurned){
+                dcNew.cards[row][col].isTurned = !dcNew.cards[row][col].isTurned;
+            }
+            dcNew.markRevealed();
             return dcNew
         })
-    }
+
+    };
     const card = dc.cards[row][col];
 
-    // const hasBeenRevealed = card.hasBeenRevealed;
+    const hasBeenRevealed = card.hasBeenRevealed;
     const isTurned = card.isTurned;
 
     let value = '';  //if not revealed
     let backgroundColor = 'red';
 
     if (isTurned) {
-        console.log('I AM HEERE');
         value = card.val;
         backgroundColor = backgroundColorIsTurned;
-        console.log(card)
     }
 
+
     return (
-        <div>
+        <div> {!hasBeenRevealed && (
             <button style={{
                 color: `${color}`,
                 fontSize: `${fontSize}px`,
                 backgroundColor: `${backgroundColor}`
 
-            }} onClick={onClick}>{value}</button>
+            }} onClick={onClick}>{value}</button>)}
         </div>)
 }
 
