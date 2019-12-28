@@ -1,7 +1,7 @@
 import React from 'react'
 
-const End = () => {
-    return (<h1>Congratz!</h1>)
+const End = ({userName}) => {
+    return (<h1>Congratz {userName}!</h1>)
 };
 
 export default End;

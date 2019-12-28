@@ -3,7 +3,7 @@ import DealtCards from '../helpers'
 import Card from './card'
 import End from "./end";
 
-const Game = ({dc, setDC, nRows, nCols, gameInitialized, setGameInitialized}) => {
+const Game = ({dc, setDC, nRows, nCols, userName, gameInitialized, setGameInitialized}) => {
     // EXECUTION
     if (!gameInitialized || (dc === null)) {
         // very first game or restarted
@@ -32,7 +32,7 @@ const Game = ({dc, setDC, nRows, nCols, gameInitialized, setGameInitialized}) =>
             {!dc.checkGameOver() ? (
                 <div className="gridContainer" style={{'gridTemplateColumns': `repeat(${nCols},auto`}}>
                     {temp}
-                </div>) : (<End/>)}
+                </div>) : (<End userName={userName}/>)}
         </div>)
 
 };

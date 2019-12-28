@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-const InputForm = ({nRows, setNRows, nCols, setNCols, setInputFormSubmitted}) => {
+const InputForm = ({nRows, setNRows, nCols, setNCols, userName, setUserName, setInputFormSubmitted}) => {
 
     const onChangeRows = (e) => {
         setNRows(Number(e.target.value))
@@ -11,8 +11,12 @@ const InputForm = ({nRows, setNRows, nCols, setNCols, setInputFormSubmitted}) =>
         setNCols(Number(e.target.value))
     };
 
+    const onChangeUserName = (e) => {
+        setUserName(e.target.value)
+    };
+
     const checkInputCorrect = () => {
-        return nCols * nRows % 2 === 0
+        return (nCols * nRows % 2 === 0 && userName !== '')
     };
 
     const onSubmit = (event) => {
@@ -20,7 +24,7 @@ const InputForm = ({nRows, setNRows, nCols, setNCols, setInputFormSubmitted}) =>
         if (checkInputCorrect()) {
             setInputFormSubmitted(true);
         } else {
-            alert('Input cards needs to be even')
+            alert('Input cards needs to be even and username needs to be specified!')
         }
 
     };
@@ -34,6 +38,10 @@ const InputForm = ({nRows, setNRows, nCols, setNCols, setInputFormSubmitted}) =>
             <div>
                 <label>Number of columns:</label>
                 <input type="text" name="Number of columns" value={nCols} onChange={onChangeCols}></input>
+            </div>
+            <div>
+                <label>Username:</label>
+                <input type="text" name="Username" value={userName} onChange={onChangeUserName}></input>
             </div>
             <div>
                 <input type="submit" value="Start game"></input>
