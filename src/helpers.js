@@ -42,7 +42,7 @@ class DealtCards {
         } else {
             this.cards = cards
         }
-
+        this.finalTime = null
     }
 
     _dealCards(nRows, nCols) {
@@ -107,13 +107,16 @@ class DealtCards {
 
     }
 
-    checkGameOver() {
+    checkGameOver(time) {
         for (let r = 0; r < this.nRows; r++) {
             for (let c = 0; c < this.nCols; c++) {
                 if (!this.cards[r][c].hasBeenRevealed) {
                     return false
                 }
             }
+        }
+        if (this.finalTime === null){
+            this.finalTime = time
         }
         return true
     }

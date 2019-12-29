@@ -3,17 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Game from "./components/game";
 import InputForm from "./components/input";
-import Restart from "./components/header"
+import {Restart, Timer} from "./components/header"
 
 
 const App = () => {
 
-    const [nRows, setNRows] = useState(2);
-    const [nCols, setNCols] = useState(3);
+    const [nRows, setNRows] = useState(1);
+    const [nCols, setNCols] = useState(2);
     const [userName, setUserName] = useState('CoolUser');
     const [inputFormSubmitted, setInputFormSubmitted] = useState(false);
     const [gameInitialized, setGameInitialized] = useState(false);
     const [dc, setDC] = useState(null);
+    const [time, setTime] = useState(0)
 
 
     return (
@@ -21,6 +22,7 @@ const App = () => {
             <div id="header">
                 <Restart setInputFormSubmitted={setInputFormSubmitted}
                          setGameInitialized={setGameInitialized}/>
+                 <Timer time={time}/>
             </div>
             <div id="body">
                 {!inputFormSubmitted ? (
@@ -38,7 +40,10 @@ const App = () => {
                            nCols={nCols}
                            userName={userName}
                            gameInitialized={gameInitialized}
-                           setGameInitialized={setGameInitialized}/>)
+                           setGameInitialized={setGameInitialized}
+                           time={time}
+                           setTime={setTime}
+                />)
                 }
 
             </div>

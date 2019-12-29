@@ -1,9 +1,22 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import DealtCards from '../helpers'
 import Card from './card'
 import End from "./end";
 
-const Game = ({dc, setDC, nRows, nCols, userName, gameInitialized, setGameInitialized}) => {
+const Game = ({dc, setDC, nRows, nCols, userName, gameInitialized, setGameInitialized, time, setTime}) => {
+
+    //Set Timer
+    useEffect(() => {
+        const interval = setInterval(() => setTime(oldTime => oldTime + 1), 1000);// componentDidMount
+
+        return () => {
+            clearInterval(interval);
+            setTime(0)
+        }  // componentWillUnmount
+        /* eslint-disable-next-line */
+    }, []);
+
+
     // EXECUTION
     if (!gameInitialized || (dc === null)) {
         // very first game or restarted
@@ -29,10 +42,10 @@ const Game = ({dc, setDC, nRows, nCols, userName, gameInitialized, setGameInitia
 
     return (
         <div>
-            {!dc.checkGameOver() ? (
+            {!dc.checkGameOver(time) ? (
                 <div className="gridContainer" style={{'gridTemplateColumns': `repeat(${nCols},auto`}}>
                     {temp}
-                </div>) : (<End userName={userName}/>)}
+                </div>) : (<End userName={userName} finalTime={dc.finalTime} setTime={setTime}/>)}
         </div>)
 
 };
