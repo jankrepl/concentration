@@ -14,15 +14,14 @@ const App = () => {
     const [inputFormSubmitted, setInputFormSubmitted] = useState(false);
     const [gameInitialized, setGameInitialized] = useState(false);
     const [dc, setDC] = useState(null);
-    const [time, setTime] = useState(0)
-
+    const [time, setTime] = useState(0);
 
     return (
         <div id="wrapper">
             <div id="header">
                 <Restart setInputFormSubmitted={setInputFormSubmitted}
                          setGameInitialized={setGameInitialized}/>
-                 <Timer time={time}/>
+                <Timer time={time}/>
             </div>
             <div id="body">
                 {!inputFormSubmitted ? (

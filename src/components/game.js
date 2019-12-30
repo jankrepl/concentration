@@ -3,8 +3,10 @@ import DealtCards from '../helpers'
 import Card from './card'
 import End from "./end";
 
+
 const Game = ({dc, setDC, nRows, nCols, userName, gameInitialized, setGameInitialized, time, setTime}) => {
 
+    let nCards = nRows * nCols;
     //Set Timer
     useEffect(() => {
         const interval = setInterval(() => setTime(oldTime => oldTime + 1), 1000);// componentDidMount
@@ -45,7 +47,7 @@ const Game = ({dc, setDC, nRows, nCols, userName, gameInitialized, setGameInitia
             {!dc.checkGameOver(time) ? (
                 <div className="gridContainer" style={{'gridTemplateColumns': `repeat(${nCols},auto`}}>
                     {temp}
-                </div>) : (<End userName={userName} finalTime={dc.finalTime} setTime={setTime}/>)}
+                </div>) : (<End userName={userName} finalTime={dc.finalTime} setTime={setTime} nCards={nCards}/>)}
         </div>)
 
 };
