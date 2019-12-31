@@ -17,28 +17,33 @@ const Firebase = ({nCards, userName, finalTime, nEntriesToDisplay}) => {
     const [db, setDB] = useState(null);
     useEffect(() => {
         // connect to database
+        console.log('I AM INSIDE')
         if (!firebase.apps.length) {
             firebase.initializeApp(firebaseConfig);
         }
 
         // get reference
-        let ref = firebase.database().ref('highscores').child(String(nCards));
+        let ref = firebase.database().ref('highscoresNew').child(String(nCards));
 
         // Upload highscore
         let newEntry = {};
-        newEntry[userName] = finalTime;
-        ref.update(newEntry);
+        newEntry['score'] = finalTime;
+        newEntry['userName'] = userName;
+        newEntry['timeStamp'] = (new Date()).getTime();
+        // refEntry.update(newEntry);
+        ref.push(newEntry);
 
         // Get all highscores for a given nCards
         ref.once('value').then(
             (snapshot) => setDB(snapshot.val())
         )
-    });
+    }, [finalTime, nCards, userName]);
 
+    console.log('RENDER LEADERBOARD')
     let temp;
     if (db !== null) {
         let items = Object.keys(db).map(function(key) {
-            return [key, db[key]];
+            return [db[key]['userName'], db[key]['score']];
         });
 
         items.sort(function(first, second) {
