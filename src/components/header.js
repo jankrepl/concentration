@@ -16,8 +16,8 @@ export {Restart}
 
 const Timer = ({time}) => {
     return (
-        <div>
-            {(time !== 0) && (<h1>Elapsed seconds: {time}</h1>)}
+        <div id="timer">
+            {(time !== 0) && (<h1 id="timerText">Elapsed seconds: {time}</h1>)}
         </div>)
 };
 

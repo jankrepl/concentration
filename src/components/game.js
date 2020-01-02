@@ -36,19 +36,29 @@ const Game = ({dc, setDC, nRows, nCols, userName, gameInitialized, setGameInitia
         }
     }
 
-    let temp = (cardValues.map((x, ix) => <div className="gridItem" key={ix}><Card dc={x[0]} row={x[1]} col={x[2]}
-                                                                                   setDC={setDC} color='black'
-                                                                                   fontSize={20}
-                                                                                   backgroundColorIsTurned='green'/>
-    </div>));
+    let temp = (cardValues.map((x, ix) =>
+        <div className="gridItem"
+             key={ix}><Card dc={x[0]}
+                            row={x[1]}
+                            col={x[2]}
+                            setDC={setDC}
+                            backgroundColorIsTurned='#7FE83C'/>
+        </div>));
 
     return (
-        <div>
+        <React.Fragment>
             {!dc.checkGameOver(time) ? (
-                <div className="gridContainer" style={{'gridTemplateColumns': `repeat(${nCols},auto`}}>
+                <div id="gridContainer"
+                     style={
+                         {
+                             'gridTemplateColumns': `repeat(${nCols},1fr`,
+                             'gridTemplateRows': `repeat(${nRows},1fr`
+
+                         }
+                     }>
                     {temp}
                 </div>) : (<End userName={userName} finalTime={dc.finalTime} setTime={setTime} nCards={nCards}/>)}
-        </div>)
+        </React.Fragment>)
 
 };
 
