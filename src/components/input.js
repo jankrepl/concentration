@@ -24,27 +24,37 @@ const InputForm = ({nRows, setNRows, nCols, setNCols, userName, setUserName, set
         if (checkInputCorrect()) {
             setInputFormSubmitted(true);
         } else {
-            alert('Input cards needs to be even and username needs to be specified!')
+            alert('Input cards need to be even and username needs to be specified!')
         }
 
     };
 
     return (
-        <form onSubmit={onSubmit}>
+        <form id="inputForm" onSubmit={onSubmit}>
             <div>
-                <label>Number of rows:</label>
-                <input type="text" name="Number of rows" value={nRows} onChange={onChangeRows}></input>
+                <input className="inputField"
+                       placeholder="# rows"
+                       type="text"
+                       value={nRows || ""}
+                       onChange={onChangeRows}
+                />
             </div>
             <div>
-                <label>Number of columns:</label>
-                <input type="text" name="Number of columns" value={nCols} onChange={onChangeCols}></input>
+                <input className="inputField"
+                       placeholder="# columns"
+                       type="text"
+                       value={nCols || ""}
+                       onChange={onChangeCols}/>
             </div>
             <div>
-                <label>Username:</label>
-                <input type="text" name="Username" value={userName} onChange={onChangeUserName}></input>
+                <input className="inputField"
+                       placeholder="Username"
+                       type="text"
+                       value={userName}
+                       onChange={onChangeUserName}/>
             </div>
             <div>
-                <input type="submit" value="Start game"></input>
+                <input id="submitButton" type="submit" value="Start game"/>
             </div>
 
         </form>)

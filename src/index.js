@@ -8,9 +8,9 @@ import {Restart, Timer} from "./components/header"
 
 const App = () => {
 
-    const [nRows, setNRows] = useState(1);
-    const [nCols, setNCols] = useState(2);
-    const [userName, setUserName] = useState('CoolUser');
+    const [nRows, setNRows] = useState(0);  // like this the placeholder will show
+    const [nCols, setNCols] = useState(0);  // like this the placeholder will show
+    const [userName, setUserName] = useState('');  // like this the placeholder will show
     const [inputFormSubmitted, setInputFormSubmitted] = useState(false);
     const [gameInitialized, setGameInitialized] = useState(false);
     const [dc, setDC] = useState(null);
@@ -20,7 +20,11 @@ const App = () => {
         <div id="wrapper">
             <div id="header">
                 <Restart setInputFormSubmitted={setInputFormSubmitted}
-                         setGameInitialized={setGameInitialized}/>
+                         setGameInitialized={setGameInitialized}
+                         setNRows={setNRows}
+                         setNCols={setNCols}
+                         setUserName={setUserName}
+                />
                 <Timer time={time}/>
             </div>
             <div id="body">

@@ -1,12 +1,15 @@
 import React from 'react'
 
 
-const Restart = ({setInputFormSubmitted, setGameInitialized}) => {
+const Restart = ({setInputFormSubmitted, setGameInitialized, setNRows, setNCols, setUserName}) => {
     const onClick = () => {
         setInputFormSubmitted(false);
         setGameInitialized(false)
+        setNRows(0);
+        setNCols(0);
+        setUserName("");
     };
-    return (<button onClick={onClick}>Restart</button>)
+    return (<button id="restartButton" onClick={onClick}>Restart</button>)
 };
 
 export {Restart}

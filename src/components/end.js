@@ -6,7 +6,7 @@ const End = ({userName, finalTime, setTime, nCards}) => {
     return (
         <div>
             <h1>Congratz {userName}! Finished in {finalTime} seconds</h1>
-            <Firebase nCards={nCards} userName={userName} finalTime={finalTime} nEntriesToDisplay={5}/>
+            <Firebase nCards={nCards} userName={userName} finalTime={finalTime} nEntriesToDisplay={20}/>
         </div>)
 };
 

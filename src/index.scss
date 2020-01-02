@@ -1,0 +1,45 @@
+@import "scss/mixins";
+@import "scss/variables";
+
+#wrapper{
+  height: $height;
+  width: $width;
+}
+#header {
+  background-color: $header-color;
+  height: 10%;
+  width: 100%;
+}
+#body{
+  background-color: $body-color;
+  height: 80%;
+  width: 100%;
+}
+
+#footer{
+  background-color: $footer-color;
+  height: 10%;
+}
+
+#restartButton{
+@include beautiful-button($restart-button-color, $font-family);
+}
+
+#inputForm {
+  text-align: center;
+}
+
+.inputField{
+  @include beautiful-input-field($input-field-color, $font-family)
+}
+
+
+#submitButton{
+@include beautiful-button($submit-button-color, $font-family);
+  align-content: center;
+}
+
+.gridContainer {
+  background-color: aliceblue;
+  display: grid;
+}
