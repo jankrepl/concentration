@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/concentration/static/css/main.b419beb2.chunk.css",
-    "main.js": "/concentration/static/js/main.1a963868.chunk.js",
-    "main.js.map": "/concentration/static/js/main.1a963868.chunk.js.map",
+    "main.css": "/concentration/static/css/main.7ae89959.chunk.css",
+    "main.js": "/concentration/static/js/main.dcd26800.chunk.js",
+    "main.js.map": "/concentration/static/js/main.dcd26800.chunk.js.map",
     "runtime-main.js": "/concentration/static/js/runtime-main.d458acfe.js",
     "runtime-main.js.map": "/concentration/static/js/runtime-main.d458acfe.js.map",
     "static/js/2.f0c3db52.chunk.js": "/concentration/static/js/2.f0c3db52.chunk.js",
     "static/js/2.f0c3db52.chunk.js.map": "/concentration/static/js/2.f0c3db52.chunk.js.map",
     "index.html": "/concentration/index.html",
-    "precache-manifest.c6435fb1e3ff12c0922d5ccf4ddd38c9.js": "/concentration/precache-manifest.c6435fb1e3ff12c0922d5ccf4ddd38c9.js",
+    "precache-manifest.5edb5547b10e93c2f86917b761579584.js": "/concentration/precache-manifest.5edb5547b10e93c2f86917b761579584.js",
     "service-worker.js": "/concentration/service-worker.js",
-    "static/css/main.b419beb2.chunk.css.map": "/concentration/static/css/main.b419beb2.chunk.css.map",
+    "static/css/main.7ae89959.chunk.css.map": "/concentration/static/css/main.7ae89959.chunk.css.map",
     "static/js/2.f0c3db52.chunk.js.LICENSE": "/concentration/static/js/2.f0c3db52.chunk.js.LICENSE"
   },
   "entrypoints": [
     "static/js/runtime-main.d458acfe.js",
     "static/js/2.f0c3db52.chunk.js",
-    "static/css/main.b419beb2.chunk.css",
-    "static/js/main.1a963868.chunk.js"
+    "static/css/main.7ae89959.chunk.css",
+    "static/js/main.dcd26800.chunk.js"
   ]
 }
