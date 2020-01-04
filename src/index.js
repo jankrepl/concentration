@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Game from "./components/game";
 import InputForm from "./components/input";
-import {Restart, Timer} from "./components/header"
+import {Restart, Timer, Info} from "./components/header"
 
 
 const App = () => {
@@ -26,6 +26,7 @@ const App = () => {
                          setUserName={setUserName}
                 />
                 <Timer time={time}/>
+                <Info/>
             </div>
             <div id="body">
                 {!inputFormSubmitted ? (

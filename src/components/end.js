@@ -7,6 +7,7 @@ const End = ({userName, finalTime, setTime, nCards}) => {
         <React.Fragment>
             <h1>{`Congratz ${userName}! Finished in ${finalTime} seconds`}</h1>
             <Firebase nCards={nCards} userName={userName} finalTime={finalTime} nEntriesToDisplay={20}/>
+
         </React.Fragment>)
 };
 
