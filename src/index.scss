@@ -17,8 +17,10 @@
   height: 70%;
   width: 100%;
   display: flex;
+  padding: 25px;
   flex-direction: column;
   box-sizing: border-box;
+  overflow: scroll;
 }
 
 #body h1 {
