@@ -56,27 +56,26 @@ const Firebase = ({nCards, userName, finalTime, nEntriesToDisplay}) => {
         ref.push(newEntry);
 
         // Get all highscores for a given nCards
-        ref.once('value').then(
-            (snapshot) => setDB(snapshot.val())
+        ref.orderByChild('score').limitToFirst(nEntriesToDisplay).once('value').then(
+            (snapshot) => {
+                let newDB = [];
+                snapshot.forEach(x => {newDB.push(x.val())});
+                setDB(newDB);
+            }
         )
-    }, [finalTime, nCards, userName]);
+    }, [finalTime, nCards, userName, nEntriesToDisplay]);
 
-    console.log('RENDER LEADERBOARD');
     let items;
     if (db !== null) {
-        items = Object.keys(db).map(function (key) {
-            return [db[key]['userName'], db[key]['score'], db[key]['timeStamp']];
+        // console.log(db);
+        items = Object.keys(db).map(function (key, ix) {
+            return [ix + 1, db[key]['userName'], db[key]['score'], db[key]['timeStamp']];
         });
 
-        items.sort(function (first, second) {
-            return -(second[1] - first[1]);
-        });
-
-        items = items.slice(0, nEntriesToDisplay);
     } else {
-        return null
+        return <h1>Fetching leaderboard ...</h1>
     }
-    const createRow = ([name, score, timeStamp]) => {
+    const createRow = ([rank, name, score, timeStamp]) => {
         let d = new Date(timeStamp);
         let day = d.getDay();
         let month = d.getMonth() + 1;
@@ -84,7 +83,7 @@ const Firebase = ({nCards, userName, finalTime, nEntriesToDisplay}) => {
         let minutes = (d.getMinutes() < 10 ? '0' : '') + d.getMinutes();
         let hours = d.getHours();
         let time = `${day}/${month}/${year} ${hours}:${minutes}`;
-        return {name, score, time, timeStamp}  // probably jsx:D
+        return {rank, name, score, time, timeStamp}  // probably jsx:D
     };
 
     const rows = items.map(createRow);
@@ -94,17 +93,19 @@ const Firebase = ({nCards, userName, finalTime, nEntriesToDisplay}) => {
             <Table className={classes.table}>
                 <TableHead>
                     <TableRow>
-                        <TableCell className={classes.headerCell}>Username</TableCell>
-                        <TableCell className={classes.headerCell} align="right">Score</TableCell>
-                        <TableCell className={classes.headerCell} align="right">Time</TableCell>
+                        <TableCell className={classes.headerCell} align="center">Ranking</TableCell>
+                        <TableCell className={classes.headerCell} align="center">Username</TableCell>
+                        <TableCell className={classes.headerCell} align="center">Score</TableCell>
+                        <TableCell className={classes.headerCell} align="center">Time</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {rows.map(row => (
                         <TableRow key={row.timeStamp}>
-                            <TableCell component="th" scope="row">{row.name}</TableCell>
-                            <TableCell align="right">{row.score}</TableCell>
-                            <TableCell align="right">{row.time}</TableCell>
+                            <TableCell component="th" scope="row" align="center">{row.rank}</TableCell>
+                            <TableCell align="center">{row.name}</TableCell>
+                            <TableCell align="center">{row.score}</TableCell>
+                            <TableCell align="center">{row.time}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
