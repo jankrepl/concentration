@@ -1,6 +1,6 @@
 import * as firebase from 'firebase';
 import React, {useEffect, useState} from "react";
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -10,16 +10,16 @@ import TableRow from '@material-ui/core/TableRow';
 
 
 const useStyles = makeStyles({
-    headerCell: {
-        "font-weight": "bold",
-    },
-    table: {
-        height: "90%",
-        width: "90%",
-        margin: "0 auto"
+        headerCell: {
+            "font-weight": "bold",
+        },
+        table: {
+            height: "90%",
+            width: "90%",
+            margin: "0 auto"
 
+        }
     }
-}
 );
 
 
@@ -77,7 +77,13 @@ const Firebase = ({nCards, userName, finalTime, nEntriesToDisplay}) => {
         return null
     }
     const createRow = ([name, score, timeStamp]) => {
-        let time = (new Date(timeStamp)).toString();
+        let d = new Date(timeStamp);
+        let day = d.getDay();
+        let month = d.getMonth() + 1;
+        let year = d.getFullYear();
+        let minutes = (d.getMinutes() < 10 ? '0' : '') + d.getMinutes();
+        let hours = d.getHours();
+        let time = `${day}/${month}/${year} ${hours}:${minutes}`;
         return {name, score, time, timeStamp}  // probably jsx:D
     };
 
