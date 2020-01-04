@@ -4,10 +4,10 @@ import Firebase from "./firebase";
 const End = ({userName, finalTime, setTime, nCards}) => {
     setTime(0); // reset timer
     return (
-        <div>
+        <React.Fragment>
             <h1>Congratz {userName}! Finished in {finalTime} seconds</h1>
             <Firebase nCards={nCards} userName={userName} finalTime={finalTime} nEntriesToDisplay={20}/>
-        </div>)
+        </React.Fragment>)
 };
 
 export default End;

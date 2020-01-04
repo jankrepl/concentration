@@ -1,5 +1,27 @@
 import * as firebase from 'firebase';
 import React, {useEffect, useState} from "react";
+import { makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+
+
+const useStyles = makeStyles({
+    headerCell: {
+        "font-weight": "bold",
+    },
+    table: {
+        height: "90%",
+        width: "90%",
+        margin: "0 auto"
+
+    }
+}
+);
+
 
 let firebaseConfig = {
     apiKey: "AIzaSyDTBOhkfQUnZAIlWlkQa1dbf8338RXIhCI",
@@ -14,10 +36,11 @@ let firebaseConfig = {
 
 // Initialize Firebase
 const Firebase = ({nCards, userName, finalTime, nEntriesToDisplay}) => {
+
     const [db, setDB] = useState(null);
+    const classes = useStyles();
     useEffect(() => {
         // connect to database
-        console.log('I AM INSIDE')
         if (!firebase.apps.length) {
             firebase.initializeApp(firebaseConfig);
         }
@@ -30,7 +53,6 @@ const Firebase = ({nCards, userName, finalTime, nEntriesToDisplay}) => {
         newEntry['score'] = finalTime;
         newEntry['userName'] = userName;
         newEntry['timeStamp'] = (new Date()).getTime();
-        // refEntry.update(newEntry);
         ref.push(newEntry);
 
         // Get all highscores for a given nCards
@@ -39,24 +61,53 @@ const Firebase = ({nCards, userName, finalTime, nEntriesToDisplay}) => {
         )
     }, [finalTime, nCards, userName]);
 
-    console.log('RENDER LEADERBOARD')
-    let temp;
+    console.log('RENDER LEADERBOARD');
+    let items;
     if (db !== null) {
-        let items = Object.keys(db).map(function(key) {
-            return [db[key]['userName'], db[key]['score']];
+        items = Object.keys(db).map(function (key) {
+            return [db[key]['userName'], db[key]['score'], db[key]['timeStamp']];
         });
 
-        items.sort(function(first, second) {
+        items.sort(function (first, second) {
             return -(second[1] - first[1]);
         });
 
         items = items.slice(0, nEntriesToDisplay);
-        temp = items.map((entry, ix) => <li key={ix}>{entry[0]}: {entry[1]}</li>)
     } else {
-        temp = <h1>Loading leaderboard.</h1>
+        return null
     }
+    const createRow = ([name, score, timeStamp]) => {
+        let time = (new Date(timeStamp)).toString();
+        return {name, score, time, timeStamp}  // probably jsx:D
+    };
 
-    return (<div>{temp}</div>)
+    const rows = items.map(createRow);
+
+    return (
+        <TableContainer id="table">
+            <Table className={classes.table}>
+                <TableHead>
+                    <TableRow>
+                        <TableCell className={classes.headerCell}>Username</TableCell>
+                        <TableCell className={classes.headerCell} align="right">Score</TableCell>
+                        <TableCell className={classes.headerCell} align="right">Time</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {rows.map(row => (
+                        <TableRow key={row.timeStamp}>
+                            <TableCell component="th" scope="row">{row.name}</TableCell>
+                            <TableCell align="right">{row.score}</TableCell>
+                            <TableCell align="right">{row.time}</TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+
+
+            </Table>
+        </TableContainer>)
+    //
+    // return (<div>{temp}</div>)
 
 };
 
